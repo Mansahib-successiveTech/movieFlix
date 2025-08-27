@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///home/mansahib.singh/Desktop/movies/frontend/my-movies/src/app/movies/%5Bid%5D/page.jsx"],"sourcesContent":["\nconst MovieByid=()=>{\nreturn(<>\n<p>yoyoy</p>\n</>)\n}\nexport default MovieByid;"],"names":[],"mappings":";;;;;;AACA,MAAM,YAAU;IAChB,qBAAO;kBACP,cAAA,8OAAC;sBAAE;;;;;;;AAEH;uCACe","debugId":null}}]
-}

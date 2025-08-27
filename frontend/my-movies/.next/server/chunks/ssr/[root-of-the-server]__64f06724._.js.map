@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///home/mansahib.singh/Desktop/movies/frontend/my-movies/src/app/home/page.jsx"],"sourcesContent":["import Navbar from \"@/components/Navbar\";\n\nexport default function HomePage() {\n  return (\n    <div className=\"bg-zinc-900 h-screen text-white\">\n    \n<p>hi this is home page</p>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBAEnB,cAAA,8OAAC;sBAAE;;;;;;;;;;;AAGH","debugId":null}}]
-}
