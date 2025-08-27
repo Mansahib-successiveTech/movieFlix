@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///home/mansahib.singh/Desktop/movies/frontend/my-movies/src/app/register/page.jsx"],"sourcesContent":["import Navbar from \"@/components/Navbar\";\n\nexport default function Register() {\n  return (\n    <div>\n    \n<p>hi this is register</p>\n<Register />\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;;0BAEL,8OAAC;0BAAE;;;;;;0BACH,8OAAC;;;;;;;;;;;AAGD","debugId":null}}]
+}
