@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 
 export default function MovieDetails() {
   const { id } = useParams(); // dynamic id from URL
@@ -10,9 +11,21 @@ export default function MovieDetails() {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router=useRouter();
   const headers = {
     authorization: localStorage.getItem("token"),
   };
+  const deleteMovie=async()=>{
+    try{
+     await axios.delete(`http://localhost:8080/movies/deletemovie/${movieId}`,{headers});
+     alert("movie deleted");
+     router.push("/movies")
+    }
+    catch (err) {
+      console.log("error adding to cart", err.message);
+      alert(err.response?.data?.message || "Error adding to cart");
+    }
+  }
   const addToCart = async () => {
     try {
       await axios.post(
@@ -116,10 +129,14 @@ export default function MovieDetails() {
           <div className="mt-8 flex gap-4">
             {isAdmin ? (
               <>
-                <button className="px-6 py-2 bg-blue-600 rounded hover:bg-blue-700">
+            
+                <button className="px-6 py-2 bg-blue-600 rounded hover:bg-blue-700"
+                  onClick={() => router.push(`/modifyMovie/${movieId}`)}
+>
                   Modify
                 </button>
-                <button className="px-6 py-2 bg-red-600 rounded hover:bg-red-700">
+            
+                <button className="px-6 py-2 bg-red-600 rounded hover:bg-red-700" onClick={deleteMovie}>
                   Delete
                 </button>
               </>
