@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///home/mansahib.singh/Desktop/movies/frontend/my-movies/src/app/profile/update/page.jsx"],"sourcesContent":["\nexport default function HomePage() {\n  return (\n    <div className=\"bg-zinc-900 h-screen text-white\">\n  \n    <p>update</p>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;;AACe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBAEf,cAAA,8OAAC;sBAAE;;;;;;;;;;;AAGP","debugId":null}}]
-}
