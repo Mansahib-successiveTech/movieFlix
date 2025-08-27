@@ -44,7 +44,7 @@ else if(role==="admin"){
             <h1 className="text-2xl font-semibold">MovieFlix</h1>
           </div>
         </Link>
-
+        
         <div className="nav-links pt-1 block md:flex items-center gap-4">
           {/* Desktop Links */}
           <div className="hidden md:flex gap-4 text-yellow-100 font-semibold">

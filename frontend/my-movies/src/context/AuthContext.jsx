@@ -1,11 +1,13 @@
 "use client";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const MyAuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const router=useRouter();
   const [token, setToken] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState(null); // added role state
@@ -24,6 +26,7 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(false);
     setRole(null); // clear role
     alert("user logged out");
+    router.push("/");
   };
 
   const fetchRole = async () => {
