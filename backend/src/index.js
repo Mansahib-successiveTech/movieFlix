@@ -37,3 +37,16 @@ app.use(errorHandler);
 app.listen(8080,()=>{
     console.log("Server is running at port at http://localhost:8080");
 });
+
+// backend/index.js
+// import { createServer } from "./server.js";
+
+// const PORT = process.env.PORT || 8080;
+
+// (async () => {
+//   const httpServer = await createServer();
+//   httpServer.listen(PORT, () => {
+//     console.log(`Server running at http://localhost:${PORT}`);
+//     console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
+//   });
+// })();
