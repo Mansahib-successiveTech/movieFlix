@@ -34,7 +34,7 @@ const orderSchema = new mongoose.Schema(
     //  Optional: payment info
     paymentMethod: {
       type: String,
-      enum: ["COD", "CARD", "UPI"],
+      enum: ["CARD", "UPI"],
       default: "UPI",
     },
     

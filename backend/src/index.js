@@ -10,6 +10,7 @@ import { orderRouter } from './routes/order.js';
 import { loggerMiddleware } from './middlewares/logger.js';
 import { rateLimiter } from './middlewares/rateLimter.js';
 import cors from 'cors';
+import { reviewsRouter } from './routes/reviews.js';
 const app=express();
 await connectionDb();
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use("/user",userRouter);
 app.use("/fav",favRouter);
 app.use("/cart",cartRouter);
 app.use("/order",orderRouter);
+app.use("/reviews",reviewsRouter);
 //handel 404 error
 app.use((req, res, next) => {
   next(createError(404, "Not Found route"));

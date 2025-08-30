@@ -56,6 +56,13 @@ const userSchema = new mongoose.Schema(
         ref: "Order",
       },
     ],
+      // reviews written by user
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );

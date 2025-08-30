@@ -36,6 +36,16 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+     // reviews reference
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    averageRating: { type: Number, default: 0 },
+    numReviews: { type: Number, default: 0 },
+ 
   },
   {
     timestamps: true,

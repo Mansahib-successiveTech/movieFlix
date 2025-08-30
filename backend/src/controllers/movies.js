@@ -19,7 +19,12 @@ catch(err){
 export const movieById=async(req,res)=>{
   const {id}=req.params;
   try{
-  const existingMovie=await Movies.findById(id);
+  const existingMovie=await Movies.findById(id)
+  .populate({
+        path: "reviews", 
+        populate: { path: "user", select: "username avatar" } // include reviewer details
+      });
+
   if(!existingMovie){   
     return res.status(404).json({
         message:"Movie not found"
@@ -27,7 +32,21 @@ export const movieById=async(req,res)=>{
   }
   return res.status(200).json({
     message:"Movie fetched successfully",
-    movie:existingMovie
+    movie: {
+        // return selected fields + avg rating + numReviews
+        _id: existingMovie._id,
+        title: existingMovie.title,
+        poster: existingMovie.poster,
+        director: existingMovie.director,
+        genre: existingMovie.genre,
+        year: existingMovie.year,
+        price: existingMovie.price,
+        desc: existingMovie.desc,
+        language: existingMovie.language,
+        averageRating: existingMovie.averageRating.toFixed(1), // show avg rating
+        numReviews: existingMovie.numReviews, // total reviews count
+        reviews: existingMovie.reviews // include populated reviews
+      }
   }); 
 }
 catch(err){
