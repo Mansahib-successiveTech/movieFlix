@@ -4,7 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 export default function Register() {
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ export default function Register() {
 
     // Local validation
     if (!username || !email || !password || !address) {
-      alert("All fields are required");
+      toast.warning("All fields are required");
       return;
     }
 
@@ -28,13 +28,13 @@ export default function Register() {
       );
 
       if (result.data.message === "User registered successfully" || result.status === 201) {
-        alert("Registration successful! Please login.");
+        toast.success("Registration successful! Please login.");
         router.push("/login");
       }
     } catch (err) {
       // Catch 400 or other errors
       console.log(err.response?.data || err.message);
-      alert(err.response?.data?.message || "Registration failed");
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 

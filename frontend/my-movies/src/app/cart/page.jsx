@@ -2,6 +2,7 @@
 import MovieCard from "@/components/MovieCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function MovieCartPage() {
   const [cartData, setCartData] = useState([]);
@@ -12,12 +13,12 @@ export default function MovieCartPage() {
   const placeOrder=async()=>{
    try{
     const res=await axios.post("http://localhost:8080/order/placeorder",{movies:cartData},{headers})
-    alert("order placed succesfully");
+    toast.success("order placed succesfully");
     setCartData([]);
     getCart();
    }catch (err) {
       console.log("Error placing order:", err);
-      alert(err.response?.data?.message || "Failed to place order");
+      toast.error(err.response?.data?.message || "Failed to place order");
     }
   }
   const getCart = async () => {
@@ -26,7 +27,7 @@ export default function MovieCartPage() {
       setCartData(res.data.cart || []);
     } catch (err) {
       console.log("Error fetching cart:", err);
-      alert(err.response?.data?.message || "Failed to fetch cart");
+      toast.error(err.response?.data?.message || "Failed to fetch cart");
     }
   };
 
@@ -39,7 +40,7 @@ export default function MovieCartPage() {
       getCart(); // Refresh cart after deletion
     } catch (err) {
       console.log("Error removing from cart:", err);
-      alert(err.response?.data?.message || "Failed to remove from cart");
+      toast.error(err.response?.data?.message || "Failed to remove from cart");
     }
   };
 

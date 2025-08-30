@@ -3,6 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const AddMovie = () => {
   const [data, setData] = useState({
@@ -40,7 +41,7 @@ const headers = {
         !data.desc ||
         !data.language
       ) {
-        alert("Please fill all the fields");
+        toast.warning("Please fill all the fields");
         return;
       }
 
@@ -51,7 +52,7 @@ const headers = {
       );
 console.log(res);
       if (res.status === 201) {
-        alert("Movie Added Successfully");
+        toast.success("Movie Added Successfully");
         setData({
           poster: "",
           title: "",
@@ -66,7 +67,7 @@ console.log(res);
       }
     } catch (err) {
       console.log(err);
-      alert(err.response?.data?.message || "Failed to add movie");
+      toast.error(err.response?.data?.message || "Failed to add movie");
     }
   };
 

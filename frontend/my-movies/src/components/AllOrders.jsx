@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 export const AllOrders = () => {
   const headers = {
     authorization: localStorage.getItem("token"),
@@ -42,7 +42,7 @@ export const AllOrders = () => {
       );
     } catch (err) {
       console.log("Error updating status:", err);
-      alert("Failed to update status");
+      toast.error("Failed to update status");
     }
   };
 

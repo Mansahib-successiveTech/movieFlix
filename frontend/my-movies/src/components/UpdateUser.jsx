@@ -1,7 +1,9 @@
 "use client";
 
 import axios from "axios";
+import Error from "next/error";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const UpdateUser = () => {
   const [data, setData] = useState();
@@ -28,10 +30,10 @@ export const UpdateUser = () => {
         { email },
         { headers }
       );
-      alert(res.data.message || "Email updated successfully");
+      toast.success(res.data.message || "Email updated successfully");
       setData((prev) => ({ ...prev, email }));
     } catch (err) {
-      alert(err.response?.data?.message || "Update failed");
+      toast.error(err.response?.data?.message || "Update failed");
     }
   };
 

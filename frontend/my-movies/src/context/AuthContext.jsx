@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 const MyAuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setLoggedIn(false);
     setRole(null); // clear role
-    alert("user logged out");
+    toast.success("user logged out");
     router.push("/");
   };
 

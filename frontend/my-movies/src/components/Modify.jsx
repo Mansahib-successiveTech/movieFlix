@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ModifyMovie = () => {
   const { movieId } = useParams(); // Get movieId from URL
@@ -36,7 +37,7 @@ const ModifyMovie = () => {
         setData(res.data.movie);
       } catch (err) {
         console.log(err);
-        alert("Failed to fetch movie details");
+        toast.error("Failed to fetch movie details");
       } finally {
         setLoading(false);
       }
@@ -63,7 +64,7 @@ const ModifyMovie = () => {
         !data.desc ||
         !data.language
       ) {
-        alert("Please fill all the fields");
+        toast.warning("Please fill all the fields");
         return;
       }
 
@@ -74,12 +75,12 @@ const ModifyMovie = () => {
       );
 
       if (res.status === 200) {
-        alert("Movie updated successfully");
+        toast.success("Movie updated successfully");
         router.push("/movies");
       }
     } catch (err) {
       console.log(err);
-      alert(err.response?.data?.message || "Failed to update movie");
+      toast.error(err.response?.data?.message || "Failed to update movie");
     }
   };
 

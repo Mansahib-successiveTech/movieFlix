@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 export default function MovieDetails() {
   const { id } = useParams(); // dynamic id from URL
   const movieId = id;
@@ -21,11 +21,11 @@ export default function MovieDetails() {
         `http://localhost:8080/movies/deletemovie/${movieId}`,
         { headers }
       );
-      alert("movie deleted");
+      toast.success("movie deleted");
       router.push("/movies");
     } catch (err) {
       console.log("error adding to cart", err.message);
-      alert(err.response?.data?.message || "Error adding to cart");
+      toast.error(err.response?.data?.message || "Error adding to cart");
     }
   };
   //add or update review
@@ -42,11 +42,11 @@ export default function MovieDetails() {
           headers: { authorization: localStorage.getItem("token") },
         }
       );
-      alert("Review submitted successfully");
+      toast.success("Review submitted successfully");
       await fetchData(); // reload page to fetch updated reviews
     } catch (err) {
       console.log(err);
-      alert(err.response?.data?.message || "Error submitting review");
+      toast.error(err.response?.data?.message || "Error submitting review");
     }
   };
 
@@ -58,10 +58,10 @@ export default function MovieDetails() {
         { movieId },
         { headers }
       );
-      alert("Added to cart");
+      toast.success("Added to cart");
     } catch (err) {
       console.log("error adding to cart", err.message);
-      alert(err.response?.data?.message || "Error adding to cart");
+      toast.error(err.response?.data?.message || "Error adding to cart");
     }
   };
   //add to fav button function
@@ -72,10 +72,10 @@ export default function MovieDetails() {
         { movieId },
         { headers }
       );
-      alert("Added to favorites");
+      toast.success("Added to favorites");
     } catch (err) {
       console.log("error adding to favorites", err.message);
-      alert(err.response?.data?.message || "Error adding to favorites");
+      toast.error(err.response?.data?.message || "Error adding to favorites");
     }
   };
   //fetch data that i used to render movie information based on id

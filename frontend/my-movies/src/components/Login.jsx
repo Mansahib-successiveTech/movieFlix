@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const {token,login}=useAuth();  
@@ -19,7 +20,7 @@ export default function Login() {
       console.log(result.data.message);
       console.log(result);
       if (result.data.message === "" || result.status === 200) {
-        alert("Login successful");
+        toast.success("Login successful");
       //  localStorage.setItem("token", `Bearer ${result.data.token}`);
         login(result.data.token)
         //redirect to home page
@@ -27,7 +28,7 @@ export default function Login() {
       }
     } catch (err) {
       console.log(err.response?.data || err.message);
-      alert(err.response?.data?.message || "Login failed");
+      toast.error(err.response?.data?.message || "Login failed");
     }
   };
 
