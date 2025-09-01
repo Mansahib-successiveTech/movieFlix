@@ -35,7 +35,7 @@ export const addOrUpdateReview = async (req, res) => {
       await User.findByIdAndUpdate(userId, { $push: { reviews: review._id } });
     }
 
-    // recalculate eviews for the movie
+    // recalculate reviews for the movie
     const stats = await Review.aggregate([
       { $match: { movie: review.movie } },
       {
