@@ -23,9 +23,10 @@ export default function MovieFavPage() {
 
   if (!loggedIn) return null; // redirecting
 
-  const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+ const headers = {
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
 
   const getData = async () => {
     try {

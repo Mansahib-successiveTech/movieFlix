@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AddNewMovies() {
-  const { loggedIn } = useAuth();
+  const { loggedIn,role } = useAuth(); //check user loggedin or not
   const router = useRouter();
 
   useEffect(() => {
-    if (!loggedIn) {
-      router.push("/login");
+    if (!loggedIn ||  role!=="admin") {
+      router.push("/login"); // if not loggedIn and tries to access url redirect to login
     }
   }, [loggedIn, router]);
 

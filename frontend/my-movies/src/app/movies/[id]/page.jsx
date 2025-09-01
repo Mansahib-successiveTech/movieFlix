@@ -11,9 +11,10 @@ export default function MovieDetails() {
   const [isAdmin, setIsAdmin] = useState(false); //was not working if taking from local storage
   const [isLoggedIn, setIsLoggedIn] = useState(false); //for conditional rendering
   const router = useRouter();
-  const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+ const headers = {
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
   //deleting movie button function
   const deleteMovie = async () => {
     try {

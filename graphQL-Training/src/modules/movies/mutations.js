@@ -5,7 +5,7 @@ export const movieMutationResolvers = {
     const { pubsub, token } = context;
 
     if (!token) {
-      throw new Error("Not authorized"); // ensure token exists
+      throw new Error("Not authorized"); // check for token exists
     }
 
     //call REST route on the same server
@@ -21,7 +21,7 @@ export const movieMutationResolvers = {
 
     const movieForGraphQL = {
       ...movie,
-      id: movie._id, // map _id → id for GraphQL
+      id: movie._id, // id for GraphQL
     };
 
     // Publish subscription

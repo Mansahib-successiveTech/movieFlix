@@ -10,8 +10,9 @@ const ModifyMovie = () => {
   const router = useRouter();
 
   const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
 
   const [data, setData] = useState({
     poster: "",
@@ -192,7 +193,7 @@ const ModifyMovie = () => {
           Update Movie
         </button>
       </div>
-      
+
     </div>
   );
 };

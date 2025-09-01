@@ -18,21 +18,20 @@ export default function MovieCartPage() {
     }
   }, [loggedIn, router]);
 
-  if (loggedIn === null) {
-    return <p>Loading...</p>; // waiting 
-  }
+ 
 
   if (!loggedIn) return null; // redirecting
 
-  const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+const headers = {
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
 
   const placeOrder = async () => {
     try {
       await axios.post(
         "http://localhost:8080/order/placeorder",
-        { movies: cartData },
+        { movies: cartData },  // send a array of movies
         { headers }
       );
       toast.success("Order placed successfully");

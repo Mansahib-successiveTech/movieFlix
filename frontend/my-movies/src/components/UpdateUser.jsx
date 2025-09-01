@@ -8,9 +8,10 @@ import { toast } from "react-toastify";
 export const UpdateUser = () => {
   const [data, setData] = useState();
   const [email, setEmail] = useState("");
-  const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+ const headers = {
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
   const userData = async () => {
     const res = await axios.get("http://localhost:8080/user/userInfo", {
       headers,

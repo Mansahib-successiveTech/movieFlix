@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 export const UserOrder = () => {
-  const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+ const headers = {
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
 
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

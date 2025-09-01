@@ -4,14 +4,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 export const AllOrders = () => {
-  const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+ const headers = {
+  authorization: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+};
+
 
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 3;
-
+//fetch all details
   const fetchDetails = async () => {
     try {
       const res = await axios.get(
@@ -27,7 +28,7 @@ export const AllOrders = () => {
   useEffect(() => {
     fetchDetails();
   }, []);
-
+//update user order on click
   const updateStatus = async (orderId, newStatus) => {
     try {
       await axios.put(

@@ -21,7 +21,7 @@ export default function Admin() {
     return <p>Loading...</p>;
   }
 
-  // If user is not allowed, don't render anything 
+  //redirect
   if (!loggedIn || role !== "admin") {
     return null;
   }
