@@ -153,6 +153,8 @@ GraphQL server runs at: http://localhost:4000
 
 ### Database Seeding
 
+**Note:** please use your mongodb compass connection string
+
 If you are running the application for the first time or the database is empty, populate it with initial movie data:
 
 ```
