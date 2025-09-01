@@ -26,7 +26,7 @@ export const schemas = {
       .max(new Date().getFullYear())
       .required(),
     price: Joi.number().positive().required(),
-    desc: Joi.string().min(10).required(),
+    desc: Joi.string().min(5).required(),
     language: Joi.string().required(),
     poster: Joi.string().uri().required(),
   }),
