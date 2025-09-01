@@ -14,7 +14,7 @@ const Navbar = () => {
     { title: "favorites", link: "/fav" },
     { title: "Cart", link: "/cart" },
     { title: "Profile", link: "/profile" },
-    { title: "Admin", link: "/adminProfile" },
+    { title: "Admin options", link: "/adminProfile" },
   ];
   let newlinks=[];
   if(!loggedIn){
