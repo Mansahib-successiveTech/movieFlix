@@ -1,22 +1,21 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
 const MyAuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const router=useRouter();
   const [token, setToken] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [role, setRole] = useState(null); // added role state
+  const [loggedIn, setLoggedIn] = useState(null);
+  const [role, setRole] = useState(null);
 
-  const login = (newToken) => {
+  const login = async (newToken) => {
     localStorage.setItem("token", `Bearer ${newToken}`);
     setToken(newToken);
     setLoggedIn(true);
-    fetchRole(); // fetch role after login
+    await fetchRole(); // fetch role after login
   };
 
   const logout = () => {
@@ -24,9 +23,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("role");
     setToken(null);
     setLoggedIn(false);
-    setRole(null); // clear role
-    toast.success("user logged out");
-    router.push("/");
+    setRole(null);
+    toast.success("User logged out");
   };
 
   const fetchRole = async () => {
@@ -37,23 +35,29 @@ export const AuthProvider = ({ children }) => {
         },
       });
 
-      setRole(res.data.user.role); // set role in state
-      localStorage.setItem("role", res.data.user.role); // optional: store in localStorage
+      setRole(res.data.user.role);
+      localStorage.setItem("role", res.data.user.role);
     } catch (err) {
       console.log("Error fetching role:", err.response?.data || err.message);
     }
   };
 
   useEffect(() => {
-    const data = localStorage.getItem("token");
-    const savedRole = localStorage.getItem("role");
-    if (data) {
-      setLoggedIn(true);
-      if (savedRole) setRole(savedRole); // restore role from localStorage
-      else fetchRole(); // fetch role if not in localStorage
-    } else {
-      setLoggedIn(false);
-    }
+    const initAuth = async () => {
+      const storedToken = localStorage.getItem("token");
+      const storedRole = localStorage.getItem("role");
+
+      if (storedToken) {
+        setToken(storedToken);
+        setLoggedIn(true);
+        if (storedRole) setRole(storedRole);
+        else await fetchRole();
+      } else {
+        setLoggedIn(false);
+      }
+    };
+
+    initAuth();
   }, []);
 
   return (

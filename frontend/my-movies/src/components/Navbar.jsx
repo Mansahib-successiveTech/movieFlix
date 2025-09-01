@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaGripLines } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
-
+import { NotificationBell } from "./NotificationBell.jsx";
 const Navbar = () => {
   const { loggedIn,logout,role } = useAuth();
  
@@ -57,7 +57,8 @@ else if(role==="admin"){
                 {item.title}
               </Link>
             ))}
-           
+            {role==="user"?<NotificationBell/>:""}
+          
             <div className="nav-links block md:flex items-center gap-4">
               {!loggedIn?<> <Link
                 href="/login"

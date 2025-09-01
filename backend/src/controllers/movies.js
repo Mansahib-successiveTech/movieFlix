@@ -1,4 +1,5 @@
 import { Movies } from "../model/movies.js";
+import { pubsub } from "../../../graphQL-Training/src/server/pubsub.js";
 //all movies
 export const allMovies =async (req, res) => {
   try{
@@ -93,6 +94,19 @@ export const addMovie=async(req,res)=>{
     poster
   });
   await newMovie.save();
+
+  // Publish GraphQL subscription event for new movie
+  try {
+    const movieForGraphQL = {
+      ...newMovie.toObject(),
+      id: newMovie._id.toString(),
+    };
+    pubsub.publish("Movie_ADDED", { movieAdded: movieForGraphQL });
+    console.log("[REST] Published Movie_ADDED event from REST addMovie:", movieForGraphQL);
+  } catch (e) {
+    console.error("[REST] Failed to publish Movie_ADDED event:", e);
+  }
+
   return res.status(201).json({
     message:"Movie added successfully",
     movie:newMovie

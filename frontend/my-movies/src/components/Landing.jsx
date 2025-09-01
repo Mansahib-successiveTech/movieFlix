@@ -4,10 +4,35 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import MovieCard from "./MovieCard";
+import MovieCard from "./MovieCard.jsx";
+
+import { gql, useSubscription } from "@apollo/client";
+import { toast } from "react-toastify";
 
 export const LandingTop = () => {
   const [data, setData] = useState([]);
+
+  // GraphQL subscription for movieAdded
+  const MOVIE_ADDED_SUBSCRIPTION = gql`
+    subscription MovieAdded {
+      movieAdded {
+        id
+        title
+        director
+        genre
+        price
+      }
+    }
+  `;
+
+  useSubscription(MOVIE_ADDED_SUBSCRIPTION, {
+    onData: ({ data }) => {
+      if (data?.data?.movieAdded) {
+        toast.info(`New movie added: ${data.data.movieAdded.title}`);
+        getData(); // Refresh movie list
+      }
+    },
+  });
 
   const getData = async () => {
     try {

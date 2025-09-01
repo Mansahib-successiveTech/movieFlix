@@ -25,17 +25,17 @@ export const addOrUpdateReview = async (req, res) => {
       // Create new review
       review = await Review.create({
         user: userId,
-        movie: movieId, // ✅ make sure movieId is passed here
+        movie: movieId, //make sure movieId is passed here
         rating,
         comment,
       });
 
-      // Push review ref into movie & user
+      // push review ref into movie & user
       await Movies.findByIdAndUpdate(movieId, { $push: { reviews: review._id } });
       await User.findByIdAndUpdate(userId, { $push: { reviews: review._id } });
     }
 
-    // Recalculate average rating & numReviews for the movie
+    // recalculate eviews for the movie
     const stats = await Review.aggregate([
       { $match: { movie: review.movie } },
       {

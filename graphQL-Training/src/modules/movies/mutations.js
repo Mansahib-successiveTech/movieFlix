@@ -8,7 +8,7 @@ export const movieMutationResolvers = {
       throw new Error("Not authorized"); // ensure token exists
     }
 
-    // ✅ call REST route on the same server
+    //call REST route on the same server
     const res = await axios.post(
       "http://localhost:8080/movies/addmovie", // REST endpoint
       args,

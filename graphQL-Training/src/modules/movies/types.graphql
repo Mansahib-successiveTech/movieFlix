@@ -11,4 +11,6 @@ type Movie {
   createdAt: String!
   updatedAt: String!
 }
-
+type Subscription {
+  movieAdded: Movie
+}

@@ -1,9 +1,10 @@
 "use client";
 
+
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { gql, useMutation } from "@apollo/client";
 
 const AddMovie = () => {
   const [data, setData] = useState({
@@ -20,9 +21,16 @@ const AddMovie = () => {
   const router = useRouter();
 
 
-const headers = {
-    authorization: localStorage.getItem("token"),
-  };
+const ADD_MOVIE_MUTATION = gql`
+  mutation AddMovie($poster: String!, $title: String!, $director: String!, $genre: String!, $year: Int!, $price: Float!, $desc: String!, $language: String!) {
+    addMovie(poster: $poster, title: $title, director: $director, genre: $genre, year: $year, price: $price, desc: $desc, language: $language) {
+      id
+      title
+    }
+  }
+`;
+
+const [addMovieMutation, { loading }] = useMutation(ADD_MOVIE_MUTATION);
   const change = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
@@ -30,7 +38,6 @@ const headers = {
 
   const submit = async () => {
     try {
-      
       if (
         !data.poster ||
         !data.title ||
@@ -45,13 +52,20 @@ const headers = {
         return;
       }
 
-      const res = await axios.post(
-        "http://localhost:8080/movies/addmovie",
-        data,
-        { headers }
-      );
-console.log(res);
-      if (res.status === 201) {
+      const variables = {
+        poster: data.poster,
+        title: data.title,
+        director: data.director,
+        genre: data.genre,
+        year: parseInt(data.year),
+        price: parseFloat(data.price),
+        desc: data.desc,
+        language: data.language,
+      };
+
+      const res = await addMovieMutation({ variables });
+      console.log(res);
+      if (res.data?.addMovie) {
         toast.success("Movie Added Successfully");
         setData({
           poster: "",
@@ -67,7 +81,7 @@ console.log(res);
       }
     } catch (err) {
       console.log(err);
-      toast.error(err.response?.data?.message || "Failed to add movie");
+      toast.error(err.message || "Failed to add movie");
     }
   };
 

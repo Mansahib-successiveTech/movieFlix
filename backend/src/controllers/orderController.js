@@ -25,7 +25,7 @@ export const placeOrder = async (req, res, next) => {
     const newOrder = new Order({ 
       user: userId, 
       movies, 
-      paymentMethod : "UPI", //default payment 
+      paymentMethod : "UPI", //default pyment
     });
 
     const savedOrder = await newOrder.save();

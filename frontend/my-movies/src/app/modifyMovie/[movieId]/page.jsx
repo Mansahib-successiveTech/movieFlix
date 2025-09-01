@@ -192,6 +192,7 @@ const ModifyMovie = () => {
           Update Movie
         </button>
       </div>
+      
     </div>
   );
 };

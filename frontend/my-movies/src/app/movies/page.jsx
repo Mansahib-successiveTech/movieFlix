@@ -44,6 +44,7 @@ export default function MoviePage() {
 
   // filter movies
   const searchMovies =useMemo( () => {
+    
     if (!value) return data;
     return data.filter((movie) =>
       movie.title.toLowerCase().includes(value.toLowerCase())
