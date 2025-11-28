@@ -1,0 +1,16 @@
+type Movie {
+  id: ID
+  poster: String!
+  title: String!
+  director: String!
+  genre: String!
+  year: Int!
+  price: Float!
+  desc: String!
+  language: String!
+  createdAt: String!
+  updatedAt: String!
+}
+type Subscription {
+  movieAdded: Movie
+}
